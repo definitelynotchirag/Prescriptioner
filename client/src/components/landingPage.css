@@ -1,0 +1,215 @@
+/* Additional animations and effects for the landing page */
+
+/* Floating particles background */
+.floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: rgba(251, 191, 36, 0.3);
+    border-radius: 50%;
+    animation: float-particle 20s infinite linear;
+}
+
+.particle:nth-child(1) {
+    left: 20%;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.particle:nth-child(2) {
+    left: 40%;
+    animation-delay: 2s;
+    animation-duration: 22s;
+}
+
+.particle:nth-child(3) {
+    left: 60%;
+    animation-delay: 4s;
+    animation-duration: 20s;
+}
+
+.particle:nth-child(4) {
+    left: 80%;
+    animation-delay: 6s;
+    animation-duration: 24s;
+}
+
+@keyframes float-particle {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Glow effect for buttons */
+.glow-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.5s;
+}
+
+.glow-button:hover::before {
+    left: 100%;
+}
+
+/* Smooth scroll offset for anchor links */
+html {
+    scroll-padding-top: 100px;
+}
+
+/* Loading spinner */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #1e293b;
+    border-top: 2px solid #fbbf24;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Glassmorphism effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Moving background pattern */
+.moving-gradient {
+    background: rgba(251, 191, 36, 0.05);
+    animation: colorShift 15s ease infinite;
+}
+
+@keyframes colorShift {
+    0% {
+        background-color: rgba(251, 191, 36, 0.05);
+    }
+    50% {
+        background-color: rgba(59, 130, 246, 0.05);
+    }
+    100% {
+        background-color: rgba(251, 191, 36, 0.05);
+    }
+}
+
+/* Floating orbs */
+.floating-orbs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(251, 191, 36, 0.1);
+    filter: blur(1px);
+    animation: floatOrb 20s infinite linear;
+}
+
+.orb:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 25s;
+}
+
+.orb:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    left: 70%;
+    animation-delay: 5s;
+    animation-duration: 30s;
+}
+
+.orb:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    left: 40%;
+    animation-delay: 10s;
+    animation-duration: 35s;
+}
+
+@keyframes floatOrb {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.3;
+    }
+    95% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-200px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Card hover effects */
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(251, 191, 36, 0.05);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.feature-card:hover::before {
+    transform: translateX(100%);
+}
