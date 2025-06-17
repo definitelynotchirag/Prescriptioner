@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 
 const GoogleAuthLogin = ({ setUser, user }) => {
     const [gmail, setGmail] = useState("");
@@ -41,7 +42,7 @@ const GoogleAuthLogin = ({ setUser, user }) => {
             setError("");
 
             // Send the credential to your backend
-            const result = await axios.post("http://localhost:3001/api/auth/google-login", {
+            const result = await axios.post(`${API_BASE_URL}/api/auth/google-login`, {
                 credential: response.credential,
             });
 
@@ -83,7 +84,7 @@ const GoogleAuthLogin = ({ setUser, user }) => {
     const handleRegularLogin = async e => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3001/api/rootuser/login", { gmail, phone, password });
+            const response = await axios.post(`${API_BASE_URL}/api/rootuser/login`, { gmail, phone, password });
             localStorage.setItem("token", response.data.token);
             setUser(response.data.user);
             navigate("/dashboard");

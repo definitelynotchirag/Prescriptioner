@@ -1,6 +1,7 @@
 // src/components/MedicationForm.js
 import React, { useState } from 'react';
 import { PlusCircle, Calendar, Clock, Pill, Stethoscope } from 'lucide-react';
+import { API_BASE_URL } from "../config/api";
 
 const MedicationForm = ({ onMedicationAdded }) => {
     const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const MedicationForm = ({ onMedicationAdded }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/medications', {
+            const response = await fetch(`${API_BASE_URL}/medications`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

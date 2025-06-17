@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 
 const GoogleAuthSignup = ({ setUser }) => {
     const [gmail, setGmail] = useState("");
@@ -46,7 +47,7 @@ const GoogleAuthSignup = ({ setUser }) => {
     const handleRegularSignup = async e => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:3001/api/rootuser/signup", { gmail, phone, password });
+            await axios.post(`${API_BASE_URL}/api/rootuser/signup`, { gmail, phone, password });
             navigate("/login");
         } catch (err) {
             setError("Signup failed. Please try again.");

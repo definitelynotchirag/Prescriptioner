@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from "../config/api";
 
 const Login = ( {setUser , user} ) => {
   const [gmail, setGmail] = useState('');
@@ -12,7 +13,7 @@ const Login = ( {setUser , user} ) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/rootuser/login', { gmail, phone, password });
+      const response = await axios.post(`${API_BASE_URL}/api/rootuser/login`, { gmail, phone, password });
       console.log(response);
       localStorage.setItem('token', response.data.token);
       console.log(response.data.user);

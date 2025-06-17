@@ -2,6 +2,7 @@ import axios from "axios";
 import { ArrowLeft, Edit2, PlusCircle, Save, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 
 const PrescriptionPage = () => {
     const { userId, prescriptionId } = useParams();
@@ -24,9 +25,9 @@ const PrescriptionPage = () => {
 
     const fetchPrescription = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/api/users/p/${userId}/prescriptions`);
+            const response = await axios.get(`${API_BASE_URL}/api/users/p/${userId}/prescriptions`);
             const response2 = await axios.get(
-                `http://localhost:3001/api/medicines/${
+                `${API_BASE_URL}/api/medicines/${
                     response.data.filter(prescription => prescription._id == prescriptionId)[0]._id
                 }`
             );
@@ -94,7 +95,7 @@ const PrescriptionPage = () => {
 
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:3001/api/prescriptions/${prescriptionId}`, prescription);
+            await axios.put(`${API_BASE_URL}/api/prescriptions/${prescriptionId}`, prescription);
             setIsEditing(false);
         } catch (error) {
             console.error("Error saving prescription:", error);

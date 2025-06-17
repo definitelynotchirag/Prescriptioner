@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Calendar as CalendarIcon, Clock, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/api";
 
 const Calendar = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,7 +21,7 @@ const Calendar = () => {
 
     const checkAuthStatus = async () => {
         try {
-            const response = await axios.get("http://localhost:3001/api/calendar/auth-status");
+            const response = await axios.get(`${API_BASE_URL}/api/calendar/auth-status`);
             setIsAuthenticated(response.data.authenticated);
 
             if (!response.data.authenticated) {
@@ -37,7 +38,7 @@ const Calendar = () => {
 
     const getAuthUrl = async () => {
         try {
-            const response = await axios.get("http://localhost:3001/api/calendar/auth-url");
+            const response = await axios.get(`${API_BASE_URL}/api/calendar/auth-url`);
             setAuthUrl(response.data.authUrl);
         } catch (error) {
             console.error("Error getting auth URL:", error);
@@ -66,7 +67,7 @@ const Calendar = () => {
     const createEvent = async e => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3001/api/calendar/create-event", newEvent);
+            const response = await axios.post(`${API_BASE_URL}/api/calendar/create-event`, newEvent);
 
             if (response.data.needsAuth) {
                 setIsAuthenticated(false);

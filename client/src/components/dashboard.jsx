@@ -2,6 +2,7 @@ import axios from "axios";
 import { Coffee, Edit2, Moon, PlusCircle, Sun, Trash2, User, Users, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 
 const UserDashboard = ({ user }) => {
     const [users, setUsers] = useState([]);
@@ -19,7 +20,7 @@ const UserDashboard = ({ user }) => {
 
         try {
             console.log(user._id, "fdsfdsgdfsfd");
-            const response = await axios.post("http://localhost:3001/api/users", { rootUserId: user._id });
+            const response = await axios.post(`${API_BASE_URL}/api/users`, { rootUserId: user._id });
             console.log(response, "asdasdasd");
             const usersArray = Array.isArray(response.data.users) ? response.data.users : [response.data.users];
             setUsers(usersArray);
@@ -44,11 +45,11 @@ const UserDashboard = ({ user }) => {
         e.preventDefault();
         try {
             if (editingUser) {
-                await axios.put(`http://localhost:3001/api/users/${editingUser._id}`, newUser);
+                await axios.put(`${API_BASE_URL}/api/users/${editingUser._id}`, newUser);
             } else {
                 console.log("newUser", newUser, rootUserId);
 
-                await axios.post("http://localhost:3001/api/users/create", { newUser, rootUserId });
+                await axios.post(`${API_BASE_URL}/api/users/create`, { newUser, rootUserId });
             }
             fetchUsers();
             setShowForm(false);
@@ -72,7 +73,7 @@ const UserDashboard = ({ user }) => {
 
     const handleDelete = async userId => {
         try {
-            await axios.delete(`http://localhost:3001/api/users/${userId}`);
+            await axios.delete(`${API_BASE_URL}/api/users/${userId}`);
             fetchUsers();
         } catch (error) {
             console.error("Error deleting user:", error);

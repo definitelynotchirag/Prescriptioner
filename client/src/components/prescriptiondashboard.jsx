@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { API_BASE_URL } from "../config/api";
 import {
     ArrowLeft,
     Calendar,
@@ -51,7 +52,7 @@ const PrescriptionDashboard = () => {
 
     const fetchPrescriptions = useCallback(async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/api/users/p/${userId}/prescriptions`);
+            const response = await axios.get(`${API_BASE_URL}/api/users/p/${userId}/prescriptions`);
             console.log("Prescriptions:", response.data);
             setPrescriptions(response.data);
         } catch (error) {
@@ -146,7 +147,7 @@ const PrescriptionDashboard = () => {
             async () => {
                 const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                 try {
-                    const medications = await axios.post("http://localhost:3001/api/extractimg/fetchimage", {
+                    const medications = await axios.post(`${API_BASE_URL}/api/extractimg/fetchimage`, {
                         imageUrl: downloadURL,
                         userId: userId,
                         title: newPrescription.title,
@@ -180,7 +181,7 @@ const PrescriptionDashboard = () => {
 
     const handleDelete = async id => {
         try {
-            await axios.delete(`http://localhost:3001/api/users/${userId}/prescriptions/${id}`);
+            await axios.delete(`${API_BASE_URL}/api/users/${userId}/prescriptions/${id}`);
             setPrescriptions(prescriptions.filter(prescription => prescription.id !== id));
         } catch (error) {
             console.error("Error deleting prescription:", error);
@@ -194,7 +195,7 @@ const PrescriptionDashboard = () => {
     const handleSaveEdit = async id => {
         try {
             const prescriptionToUpdate = prescriptions.find(p => p.id === id);
-            await axios.put(`http://localhost:3001/api/users/${userId}/prescriptions/${id}`, prescriptionToUpdate);
+            await axios.put(`${API_BASE_URL}/api/users/${userId}/prescriptions/${id}`, prescriptionToUpdate);
             setEditMode(null);
         } catch (error) {
             console.error("Error updating prescription:", error);
@@ -204,7 +205,7 @@ const PrescriptionDashboard = () => {
     // Check Google Calendar authentication status
     const checkCalendarAuth = async () => {
         try {
-            const response = await axios.get("http://localhost:3001/api/calendar/auth-status");
+            const response = await axios.get(`${API_BASE_URL}/api/calendar/auth-status`);
             setCalendarStatus(response.data.authenticated);
         } catch (error) {
             console.error("Error checking calendar auth:", error);
@@ -217,7 +218,7 @@ const PrescriptionDashboard = () => {
         setCalendarLoading(prev => ({ ...prev, [prescriptionId]: true }));
 
         try {
-            const response = await axios.post("http://localhost:3001/api/calendar/create-medication-reminders", {
+            const response = await axios.post(`${API_BASE_URL}/api/calendar/create-medication-reminders`, {
                 prescriptionId,
                 userId,
             });

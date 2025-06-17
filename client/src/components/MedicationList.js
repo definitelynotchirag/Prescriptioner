@@ -1,13 +1,14 @@
 // src/components/MedicationList.js
 import { AlertCircle, Calendar, CheckCircle2, Clock, MoreVertical, Pill } from "lucide-react";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/api";
 
 const MedicationList = () => {
     const [medications, setMedications] = useState([]);
 
     const fetchMedications = async () => {
         try {
-            const response = await fetch("http://localhost:3001/medications");
+            const response = await fetch(`${API_BASE_URL}/medications`);
             if (response.ok) {
                 const data = await response.json();
                 setMedications(data);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 
 const GoogleOAuthCallback = ({ setUser }) => {
     const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ const GoogleOAuthCallback = ({ setUser }) => {
                 console.log("State:", state);
 
                 // Send the authorization code to your backend
-                const response = await axios.post("http://localhost:3001/api/auth/google-callback", {
+                const response = await axios.post(`${API_BASE_URL}/api/auth/google-callback`, {
                     code,
                     state,
                     redirectUri: "http://localhost:3000/oauth2callback",
