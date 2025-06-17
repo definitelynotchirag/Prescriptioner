@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
-        ? process.env.CORS_ORIGINS?.split(',') || ['https://your-domain.com']
+        ? process.env.CORS_ORIGINS?.split(',') || ['https://prescriptioner.onrender.com']
         : ['http://localhost:3000'],
     credentials: true,
     optionsSuccessStatus: 200
