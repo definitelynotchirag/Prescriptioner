@@ -32,7 +32,7 @@ const GoogleOAuthCallback = ({ setUser }) => {
                 const response = await axios.post(`${API_BASE_URL}/api/auth/google-callback`, {
                     code,
                     state,
-                    redirectUri: "http://localhost:3000/oauth2callback",
+                    redirectUri: "http://prescriptioner.onrender.com/oauth2callback",
                 });
 
                 console.log("Backend response:", response.data);

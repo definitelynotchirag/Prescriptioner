@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import { API_BASE_URL } from "./config/api";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import GoogleAuthLogin from "../src/components/GoogleAuthLogin";
 import GoogleAuthSignup from "../src/components/GoogleAuthSignup";
 import GoogleOAuthCallback from "../src/components/GoogleOAuthCallback";
@@ -12,10 +11,11 @@ import Calendar from "./components/Calendar"; // New import
 import UserDashboard from "./components/dashboard";
 import PrescriptionPage from "./components/prescription"; // New import
 import PrescriptionDashboard from "./components/prescriptiondashboard";
+import { API_BASE_URL } from "./config/api";
 import "./styles.css";
 
 // Define public routes that don't require authentication
-const publicRoutes = ['/', '/login', '/signup', '/oauth2callback', '/login-manual', '/signup-manual'];
+const publicRoutes = ["/", "/login", "/signup", "/oauth2callback", "/login-manual", "/signup-manual"];
 
 const App = () => {
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ const App = () => {
         const autoLogin = async () => {
             try {
                 const token = localStorage.getItem("token");
-                
+
                 // Skip authentication check for public routes
                 if (publicRoutes.includes(location.pathname)) {
                     // Still try to auto-login if token exists, but don't redirect if it fails

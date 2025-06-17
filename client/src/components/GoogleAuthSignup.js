@@ -33,7 +33,7 @@ const GoogleAuthSignup = ({ setUser }) => {
         const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
         const params = new URLSearchParams({
             client_id: "495171980207-d5n0p7v6ubb315cssm8d93pm31i3pqoi.apps.googleusercontent.com",
-            redirect_uri: "http://localhost:3000/oauth2callback",
+            redirect_uri: "https://prescriptioner.onrender.com/oauth2callback",
             response_type: "code",
             scope: ["openid", "email", "profile", "https://www.googleapis.com/auth/calendar"].join(" "),
             access_type: "offline",
