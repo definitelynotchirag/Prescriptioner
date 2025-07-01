@@ -31,12 +31,12 @@ const PrescriptionPage = () => {
                     response.data.filter(prescription => prescription._id == prescriptionId)[0]._id
                 }`
             );
-            console.log("gggggggggggg", response.data.filter(prescription => prescription._id == prescriptionId)[0]);
+            // console.log("gggggggggggg", response.data.filter(prescription => prescription._id == prescriptionId)[0]);
             setPrescriptionmed(response2.data);
-            console.log(
-                "Prescriptions:",
-                response.data.filter(prescription => prescription._id == prescriptionId)[0]._id
-            );
+            // console.log(
+            //     "Prescriptions:",
+            //     response.data.filter(prescription => prescription._id == prescriptionId)[0]._id
+            // );
             setPrescription(response.data.filter(prescription => prescription._id == prescriptionId)[0]);
         } catch (error) {
             console.error("Error fetching prescription:", error);

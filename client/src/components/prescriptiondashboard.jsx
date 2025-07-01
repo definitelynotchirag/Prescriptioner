@@ -53,7 +53,7 @@ const PrescriptionDashboard = () => {
     const fetchPrescriptions = useCallback(async () => {
         try {
             const response = await axios.get(`${API_BASE_URL}/api/users/p/${userId}/prescriptions`);
-            console.log("Prescriptions:", response.data);
+            // console.log("Prescriptions:", response.data);
             setPrescriptions(response.data);
         } catch (error) {
             console.error("Error fetching prescriptions:", error);
@@ -153,7 +153,7 @@ const PrescriptionDashboard = () => {
                         title: newPrescription.title,
                     });
 
-                    console.log("Prescription processed:", medications.data);
+                    // console.log("Prescription processed:", medications.data);
 
                     // Show success message
                     setSuccessMessage("Prescription uploaded successfully!");

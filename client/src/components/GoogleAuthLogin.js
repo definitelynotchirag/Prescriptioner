@@ -225,6 +225,18 @@ const GoogleAuthLogin = ({ setUser, user }) => {
                         </button>
                     </p>
                 </div>
+
+                <div className="mt-8 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
+                    <div className="text-yellow-500 font-medium mb-2">Here for Demo?</div>
+                    <div className="grid grid-cols-[100px_auto] gap-1 text-sm text-gray-300">
+                        <div>Email:</div>
+                        <div>chiragdave1888@gmail.com</div>
+                        <div>Password:</div>
+                        <div>chirag123</div>
+                        <div>Phone:</div>
+                        <div>9876543210</div>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -14,9 +14,9 @@ const Login = ({ setUser, user }) => {
         e.preventDefault();
         try {
             const response = await axios.post(`${API_BASE_URL}/api/rootuser/login`, { gmail, phone, password });
-            console.log(response);
+            // console.log(response);
             localStorage.setItem("token", response.data.token);
-            console.log(response.data.user);
+            // console.log(response.data.user);
             setUser(response.data.user);
             navigate("/dashboard");
         } catch (err) {
@@ -56,6 +56,7 @@ const Login = ({ setUser, user }) => {
                 <button type="submit" className="w-full bg-yellow-500 text-black py-2 rounded hover:bg-yellow-400">
                     Login
                 </button>
+                
             </form>
         </div>
     );

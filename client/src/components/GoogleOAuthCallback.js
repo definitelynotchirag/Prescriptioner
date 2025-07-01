@@ -24,9 +24,9 @@ const GoogleOAuthCallback = ({ setUser }) => {
                     throw new Error("No authorization code received");
                 }
 
-                console.log("Processing Google OAuth callback...");
-                console.log("Authorization code:", code);
-                console.log("State:", state);
+                // console.log("Processing Google OAuth callback...");
+                // console.log("Authorization code:", code);
+                // console.log("State:", state);
 
                 // Send the authorization code to your backend
                 const response = await axios.post(`${API_BASE_URL}/api/auth/google-callback`, {
@@ -35,7 +35,7 @@ const GoogleOAuthCallback = ({ setUser }) => {
                     redirectUri: "http://prescriptioner.onrender.com/oauth2callback",
                 });
 
-                console.log("Backend response:", response.data);
+                // console.log("Backend response:", response.data);
 
                 // Store the token and user data
                 localStorage.setItem("token", response.data.token);
@@ -47,7 +47,7 @@ const GoogleOAuthCallback = ({ setUser }) => {
                 setUser(response.data.user);
 
                 // Show success message
-                console.log("Google OAuth successful! Calendar access granted.");
+                // console.log("Google OAuth successful! Calendar access granted.");
 
                 // Navigate to dashboard
                 navigate("/dashboard");

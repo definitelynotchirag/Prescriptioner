@@ -50,7 +50,7 @@ const App = () => {
                     return;
                 }
 
-                console.log("dchirag", token);
+                // console.log("dchirag", token);
 
                 const response = await axios.post(`${API_BASE_URL}/api/rootuser/autoLogin`, { token });
 

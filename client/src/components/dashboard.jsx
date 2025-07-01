@@ -19,9 +19,9 @@ const UserDashboard = ({ user }) => {
         if (!user?._id) return;
 
         try {
-            console.log(user._id, "fdsfdsgdfsfd");
+            // console.log(user._id, "fdsfdsgdfsfd");
             const response = await axios.post(`${API_BASE_URL}/api/users`, { rootUserId: user._id });
-            console.log(response, "asdasdasd");
+            // console.log(response, "asdasdasd");
             const usersArray = Array.isArray(response.data.users) ? response.data.users : [response.data.users];
             setUsers(usersArray);
         } catch (error) {
@@ -33,7 +33,7 @@ const UserDashboard = ({ user }) => {
         fetchUsers();
     }, [fetchUsers]);
 
-    console.log(user);
+    // console.log(user);
     const rootUserId = user?._id;
 
     const handleInputChange = e => {
@@ -47,7 +47,7 @@ const UserDashboard = ({ user }) => {
             if (editingUser) {
                 await axios.put(`${API_BASE_URL}/api/users/${editingUser._id}`, newUser);
             } else {
-                console.log("newUser", newUser, rootUserId);
+                // console.log("newUser", newUser, rootUserId);
 
                 await axios.post(`${API_BASE_URL}/api/users/create`, { newUser, rootUserId });
             }
