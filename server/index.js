@@ -15,19 +15,21 @@ const rootuser = require("./routes/rootuser");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
-
-
+// Apply CORS middleware before any other middleware or routes
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production' 
-        ? process.env.CORS_ORIGINS?.split(',') || ['https://prescriptioner.onrender.com']
-        : ['http://localhost:3000'],
+    origin: [
+        "http://localhost:3000",
+        "https://prescriptioner.onrender.com",
+        "https://prescriptioner-qp3w.onrender.com",
+    ],
     credentials: true,
-    optionsSuccessStatus: 200
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
-
+app.use(bodyParser.json());
 
 mongoose
     .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
