@@ -18,9 +18,7 @@ const PORT = process.env.PORT || 3000;
 // Apply CORS middleware before any other middleware or routes
 const corsOptions = {
     origin: [
-        "http://localhost:3000",
-        "https://prescriptioner.onrender.com",
-        "https://prescriptioner.chiragx.me/",
+        "https://prescriptioner.chiragx.me",
         "https://prescriptioner-qp3w.onrender.com",
     ],
     credentials: true,

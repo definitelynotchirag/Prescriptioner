@@ -45,7 +45,7 @@ const MedicationForm = ({ onMedicationAdded }) => {
         } catch (error) {
             console.error('Error:', error);
         }
-    };
+    }
 
     return (
         <div className="bg-[#00030b] backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 shadow-xl">
@@ -168,6 +168,6 @@ const MedicationForm = ({ onMedicationAdded }) => {
                 </button>
             </form>
         </div>
-};
+)};
 
 export default MedicationForm;
