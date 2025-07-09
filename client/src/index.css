@@ -10,6 +10,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    background-color: #00030b;
 }
 
 code {
@@ -22,7 +23,7 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-    background: #1f2937;
+    background: #00030b;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -37,13 +38,13 @@ code {
 /* Background color animation */
 @keyframes backgroundShift {
     0% {
-        background-color: #0f172a;
+        background-color: #00030b;
     }
     50% {
-        background-color: #1e293b;
+        background-color: #00030b;
     }
     100% {
-        background-color: #0f172a;
+        background-color: #00030b;
     }
 }
 

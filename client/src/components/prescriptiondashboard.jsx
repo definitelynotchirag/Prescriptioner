@@ -264,7 +264,7 @@ const PrescriptionDashboard = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 p-6">
+        <div className="min-h-screen bg-[#00030b] p-6">
             {/* Back Button */}
             <Link
                 to="/dashboard"

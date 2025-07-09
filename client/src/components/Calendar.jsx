@@ -107,7 +107,7 @@ const Calendar = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-900 p-8 text-yellow-400">
+        <div className="min-h-screen bg-[#00030b] p-8 text-yellow-400">
             <div className="max-w-4xl mx-auto">
                 <div className="flex items-center mb-8">
                     <CalendarIcon className="h-8 w-8 mr-3" />

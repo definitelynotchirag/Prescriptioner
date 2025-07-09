@@ -81,7 +81,7 @@ const UserDashboard = ({ user }) => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 p-6">
+        <div className="min-h-screen bg-[#00030b] p-6">
             {/* Header */}
             <div className="max-w-7xl mx-auto">
                 <div className="bg-gray-800/60 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 shadow-xl mb-8">

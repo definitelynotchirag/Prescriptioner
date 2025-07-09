@@ -48,7 +48,7 @@ const MedicationForm = ({ onMedicationAdded }) => {
     };
 
     return (
-        <div className="bg-gray-800/60 backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 shadow-xl">
+        <div className="bg-[#00030b] backdrop-blur-lg rounded-xl p-6 border border-gray-700/50 shadow-xl">
             {/* Header */}
             <div className="flex items-center space-x-3 mb-6">
                 <div className="p-2 bg-yellow-500 rounded-lg">

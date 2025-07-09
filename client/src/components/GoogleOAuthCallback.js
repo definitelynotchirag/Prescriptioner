@@ -69,7 +69,7 @@ const GoogleOAuthCallback = ({ setUser }) => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-900 text-yellow-500 flex items-center justify-center">
+            <div className="min-h-screen bg-[#00030b] text-yellow-500 flex items-center justify-center">
                 <div className="text-center">
                     <div className="animate-spin h-12 w-12 border-4 border-yellow-500 border-t-transparent rounded-full mx-auto mb-4"></div>
                     <h2 className="text-2xl font-bold mb-2">Completing Authentication</h2>

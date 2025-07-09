@@ -103,7 +103,7 @@ const PrescriptionPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 p-6">
+        <div className="min-h-screen bg-[#00030b] p-6">
             <Link
                 to={`/${userId}`}
                 className="inline-flex items-center space-x-2 text-gray-400 hover:text-yellow-400 transition-colors duration-200 mb-6"

@@ -70,7 +70,7 @@ const App = () => {
     }, [navigate, location.pathname]);
 
     return (
-        <div className="font-bricolage">
+        <div className="font-bricolage ">
             <Routes>
                 <Route path="/" element={<LandingPage user={user} setUser={setUser} />} />
                 <Route path="/dashboard" element={<UserDashboard user={user} />} />

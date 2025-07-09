@@ -21,7 +21,7 @@ const Signup = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 text-yellow-500 flex items-center justify-center">
+        <div className="min-h-screen bg-[#00030b] text-yellow-500 flex items-center justify-center">
             <form onSubmit={handleSignup} className="bg-gray-800 p-6 rounded-md">
                 <h1 className="text-3xl font-bold mb-4">Sign Up</h1>
                 {error && <p className="text-red-500">{error}</p>}

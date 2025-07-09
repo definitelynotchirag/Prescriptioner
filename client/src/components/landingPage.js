@@ -1,16 +1,11 @@
 import {
     ArrowRightIcon,
     Bars3Icon,
-    BellIcon,
-    BoltIcon,
     CalendarIcon,
     CameraIcon,
     CheckCircleIcon,
-    CircleStackIcon,
     CpuChipIcon,
     PlayIcon,
-    ShieldCheckIcon,
-    StarIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
@@ -35,17 +30,17 @@ const MainFeatureCard = ({ icon, title, description, features, accentColor }) =>
             whileInView={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.02, y: -8 }}
             transition={{ duration: 0.6 }}
-            className={`bg-dark-800/80 backdrop-blur-sm p-10 rounded-3xl border ${colorClasses[accentColor]} transition-all duration-500 group feature-card`}
+            className={`bg-dark-800/80 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border ${colorClasses[accentColor]} transition-all duration-500 group feature-card`}
         >
-            <div className="mb-8 group-hover:scale-110 transition-transform duration-300">{icon}</div>
-            <h3 className="text-3xl font-bold mb-6 text-white group-hover:text-primary-400 transition-colors duration-300">
+            <div className="mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">{icon}</div>
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-white group-hover:text-primary-400 transition-colors duration-300">
                 {title}
             </h3>
-            <p className="text-dark-300 leading-relaxed mb-8 text-lg">{description}</p>
-            <ul className="space-y-3">
+            <p className="text-dark-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">{description}</p>
+            <ul className="space-y-2">
                 {features.map((feature, index) => (
-                    <li key={index} className="flex items-center text-dark-400">
-                        <CheckCircleIcon className="w-5 h-5 text-primary-400 mr-3 flex-shrink-0" />
+                    <li key={index} className="flex items-center text-dark-400 text-sm">
+                        <CheckCircleIcon className="w-4 h-4 text-primary-400 mr-2 flex-shrink-0" />
                         <span>{feature}</span>
                     </li>
                 ))}
@@ -70,13 +65,13 @@ const SecondaryFeatureCard = ({ icon, title, description, accentColor }) => {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.05, y: -5 }}
             transition={{ duration: 0.6 }}
-            className={`bg-dark-800/60 backdrop-blur-sm p-8 rounded-2xl border ${colorClasses[accentColor]} transition-all duration-300 group h-full`}
+            className={`bg-dark-800/60 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border ${colorClasses[accentColor]} transition-all duration-300 group h-full`}
         >
-            <div className="mb-6 group-hover:scale-110 transition-transform duration-300">{icon}</div>
-            <h3 className="text-xl font-bold mb-4 text-white group-hover:text-primary-400 transition-colors duration-300">
+            <div className="mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">{icon}</div>
+            <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-white group-hover:text-primary-400 transition-colors duration-300">
                 {title}
             </h3>
-            <p className="text-dark-300 leading-relaxed text-sm">{description}</p>
+            <p className="text-dark-300 leading-relaxed text-xs sm:text-sm">{description}</p>
         </motion.div>
     );
 };
@@ -124,59 +119,63 @@ const LandingPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-dark-900 text-white font-bricolage overflow-x-hidden">
+        <div className="min-h-screen text-white font-bricolage overflow-x-hidden moving-gradient">
             {/* Navbar */}
             <motion.nav
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="fixed top-0 left-0 right-0 z-50 bg-dark-900/90 backdrop-blur-xl border-b border-dark-700/50"
+                className="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-xl border-b border-dark-700/50"
             >
-                <div className="container mx-auto px-6 py-4">
+                <div className="container mx-auto px-4 py-2 sm:py-3">
                     <div className="flex justify-between items-center">
-                        <motion.div whileHover={{ scale: 1.05 }} className="text-3xl font-bold text-primary-400">
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            className="text-xl sm:text-2xl font-bold text-primary-400"
+                        >
                             Prescriptioner
                         </motion.div>
 
                         {/* Desktop Menu */}
-                        <div className="hidden md:flex items-center space-x-8">
+                        <div className="hidden md:flex items-center space-x-6 absolute left-1/2 transform -translate-x-1/2">
                             {!isLoggedIn && (
                                 <>
                                     <NavLink onClick={() => scrollToSection("features")}>Features</NavLink>
                                     <NavLink onClick={() => scrollToSection("how-it-works")}>How it Works</NavLink>
-                                    <NavLink onClick={() => scrollToSection("testimonials")}>Reviews</NavLink>
+                                    <NavLink onClick={() => navigate("/dashboard")}>Dashboard</NavLink>
                                 </>
                             )}
                         </div>
 
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-3 sm:space-x-4">
                             {isLoggedIn ? (
-                                <div className="flex items-center space-x-4">
+                                <div className="flex items-center space-x-3 sm:space-x-4">
                                     <div className="relative">
                                         <img
                                             src="https://via.placeholder.com/40"
                                             alt="User"
-                                            className="w-10 h-10 rounded-full border-2 border-primary-400 ring-2 ring-primary-400/20"
+                                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-primary-400 ring-2 ring-primary-400/20"
                                         />
-                                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-dark-900"></div>
+                                        <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full border-2 border-dark-900"></div>
                                     </div>
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                         onClick={handleLogout}
-                                        className="px-6 py-2 border border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-dark-900 transition-all duration-300 rounded-xl font-medium backdrop-blur-sm"
+                                        className="px-3 sm:px-4 py-1 sm:py-2 border border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-dark-900 transition-all duration-300 rounded-xl text-sm sm:text-base font-medium backdrop-blur-sm"
                                     >
                                         Logout
                                     </motion.button>
+                                    
                                 </div>
                             ) : (
-                                <div className="flex items-center space-x-4">
-                                    <div className="hidden sm:flex items-center space-x-4">
+                                <div className="flex items-center space-x-2 sm:space-x-4">
+                                    <div className="hidden sm:flex items-center space-x-2 sm:space-x-4">
                                         <Link to="/login">
                                             <motion.button
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
-                                                className="px-6 py-2 border border-primary-500/50 text-primary-400 hover:border-primary-400 hover:bg-primary-500/10 transition-all duration-300 rounded-xl font-medium backdrop-blur-sm"
+                                                className="px-3 sm:px-6 py-1 sm:py-2 border border-primary-500/50 text-primary-400 hover:border-primary-400 hover:bg-primary-500/10 transition-all duration-300 rounded-xl text-sm sm:text-base font-medium backdrop-blur-sm"
                                             >
                                                 Login
                                             </motion.button>
@@ -185,10 +184,10 @@ const LandingPage = () => {
                                             <motion.button
                                                 whileHover={{
                                                     scale: 1.05,
-                                                    boxShadow: "0 20px 40px rgba(251, 191, 36, 0.3)",
+                                                    boxShadow: "0 10px 20px rgba(251, 191, 36, 0.3)",
                                                 }}
                                                 whileTap={{ scale: 0.95 }}
-                                                className="px-8 py-2 bg-primary-500 text-dark-900 rounded-xl hover:bg-primary-400 transition-all duration-300 font-semibold shadow-lg"
+                                                className="px-4 sm:px-6 py-1 sm:py-2 bg-primary-500 text-dark-900 rounded-xl hover:bg-primary-400 transition-all duration-300 text-sm sm:text-base font-semibold shadow-lg"
                                             >
                                                 Get Started
                                             </motion.button>
@@ -199,7 +198,7 @@ const LandingPage = () => {
                                     <motion.button
                                         whileTap={{ scale: 0.95 }}
                                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                        className="sm:hidden p-2 text-primary-400 hover:text-primary-300 transition-colors duration-300"
+                                        className="sm:hidden p-1 text-primary-400 hover:text-primary-300 transition-colors duration-300"
                                     >
                                         {isMobileMenuOpen ? (
                                             <XMarkIcon className="w-6 h-6" />
@@ -221,7 +220,7 @@ const LandingPage = () => {
                         exit={{ opacity: 0, y: -20 }}
                         className="sm:hidden bg-dark-900/95 backdrop-blur-xl border-b border-dark-700/50"
                     >
-                        <div className="container mx-auto px-6 py-4 space-y-4">
+                        <div className="container mx-auto px-4 py-3 space-y-3">
                             <button
                                 onClick={() => {
                                     scrollToSection("features");
@@ -242,21 +241,21 @@ const LandingPage = () => {
                             </button>
                             <button
                                 onClick={() => {
-                                    scrollToSection("testimonials");
+                                    scrollToSection("login");
                                     setIsMobileMenuOpen(false);
                                 }}
                                 className="block w-full text-left text-dark-300 hover:text-primary-400 transition-colors duration-300 font-medium py-2"
                             >
-                                Reviews
+                                Login
                             </button>
-                            <div className="pt-4 space-y-3">
+                            <div className="pt-2 space-y-2">
                                 <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <button className="w-full px-6 py-3 border border-primary-500/50 text-primary-400 hover:border-primary-400 hover:bg-primary-500/10 transition-all duration-300 rounded-xl font-medium">
+                                    <button className="w-full px-4 py-2 border border-primary-500/50 text-primary-400 hover:border-primary-400 hover:bg-primary-500/10 transition-all duration-300 rounded-xl text-sm font-medium">
                                         Login
                                     </button>
                                 </Link>
                                 <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <button className="w-full px-6 py-3 bg-primary-500 hover:bg-primary-400 text-dark-900 rounded-xl transition-all duration-300 font-semibold">
+                                    <button className="w-full px-4 py-2 bg-primary-500 hover:bg-primary-400 text-dark-900 rounded-xl transition-all duration-300 text-sm font-semibold">
                                         Get Started
                                     </button>
                                 </Link>
@@ -267,50 +266,25 @@ const LandingPage = () => {
             </motion.nav>
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 overflow-hidden moving-gradient">
-                {/* Background Elements */}
-                <div className="absolute inset-0 bg-hero-pattern opacity-30"></div>
-                <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-                {/* Floating Particles */}
-                <div className="floating-particles">
-                    <span className="particle"></span>
-                    <span className="particle"></span>
-                    <span className="particle"></span>
-                    <span className="particle"></span>
-                </div>
-
-                {/* Floating Orbs */}
-                <div className="floating-orbs">
-                    <div className="orb"></div>
-                    <div className="orb"></div>
-                    <div className="orb"></div>
-                </div>
-
-                <div className="container mx-auto px-6 relative z-10">
+            <section className="relative pt-20 sm:pt-24 md:pt-28 pb-10 sm:pb-16 overflow-hidden">
+                <div className="container mx-auto px-4 relative z-10 mt-10 sm:mt-16">
                     <div className="max-w-6xl mx-auto text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="mb-8"
+                            className="mb-6"
                         >
-                            <div className="inline-flex items-center px-4 py-2 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-sm font-medium mb-8">
-                                <StarIcon className="w-4 h-4 mr-2" />
-                                AI-Powered Healthcare Solution
-                            </div>
-
-                            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black mb-4 sm:mb-6 leading-tight">
                                 <span className="text-primary-400">Scan</span>
-                                <span className="text-white"> Prescriptions,</span>
+                                <span className="text-white"> Prescriptions</span>
                                 <br />
                                 <span className="text-white">Never </span>
                                 <span className="text-accent-blue">Miss</span>
                                 <span className="text-white"> a Dose</span>
                             </h1>
 
-                            <p className="text-xl md:text-2xl text-dark-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                            <p className="p-3 sm:p-0 text-xs sm:text-sm md:text-lg mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed text-dark-300">
                                 Revolutionary AI-powered prescription scanning that automatically creates
                                 <span className="text-primary-400 font-semibold">
                                     {" "}
@@ -324,82 +298,71 @@ const LandingPage = () => {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.3 }}
-                            className="flex flex-col sm:flex-row justify-center gap-6 mb-16"
+                            className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-8 sm:mb-12"
                         >
                             <Link to="/dashboard">
                                 <motion.button
                                     whileHover={{
                                         scale: 1.05,
-                                        boxShadow: "0 25px 50px rgba(251, 191, 36, 0.4)",
+                                        boxShadow: "0 15px 30px rgba(251, 191, 36, 0.4)",
                                     }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="group px-10 py-4 bg-primary-500 text-dark-900 rounded-2xl hover:bg-primary-400 transition-all duration-300 font-bold text-lg shadow-2xl flex items-center justify-center pulse-glow glow-button"
+                                    className="group px-4 py-2 sm:px-8 sm:py-3 bg-primary-500 text-dark-900 rounded-xl sm:rounded-2xl hover:bg-primary-400 transition-all duration-300 font-bold text-sm sm:text-base shadow-xl flex items-center justify-center pulse-glow glow-button w-full sm:w-auto mb-3 sm:mb-0"
                                 >
-                                    <CameraIcon className="mr-3 group-hover:rotate-12 transition-transform duration-300 w-6 h-6" />
                                     Start Scanning Now
-                                    <ArrowRightIcon className="ml-3 group-hover:translate-x-1 transition-transform duration-300 w-6 h-6" />
+                                    <ArrowRightIcon className="ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300 w-4 h-4 sm:w-5 sm:h-5" />
                                 </motion.button>
                             </Link>
 
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="group px-10 py-4 border-2 border-primary-500 text-primary-400 rounded-2xl hover:bg-primary-500 hover:text-dark-900 transition-all duration-300 font-bold text-lg backdrop-blur-sm flex items-center justify-center glass"
+                                className="group px-10 py-2 sm:px-8 sm:py-3 border-2 border-primary-500 text-primary-400 rounded-xl sm:rounded-2xl hover:bg-primary-500 hover:text-dark-900 transition-all duration-300 font-bold text-sm sm:text-base backdrop-blur-sm flex items-center justify-center glass sm:w-auto"
                             >
-                                <PlayIcon className="mr-3 group-hover:scale-110 transition-transform duration-300 w-5 h-5" />
+                                <PlayIcon className="mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-300 w-4 h-4 sm:w-5 sm:h-5" />
                                 Watch Demo
                             </motion.button>
-                        </motion.div>
-
-                        {/* Stats */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.6 }}
-                            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-                        >
-                            <StatCard number="99.9%" label="AI Accuracy Rate" />
-                            <StatCard number="< 5 sec" label="Processing Time" />
-                            <StatCard number="24/7" label="Always Available" />
                         </motion.div>
                     </div>
                 </div>
             </section>
 
             {/* How it Works */}
-            <section id="how-it-works" className="py-32 bg-dark-800 relative">
+            <section id="how-it-works" className="py-8 sm:py-12 md:py-20 relative">
                 <div className="absolute inset-0 bg-hero-pattern opacity-5"></div>
-                <div className="container mx-auto px-6 relative z-10">
+                <div className="container mx-auto px-4 relative z-10">
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 0.8 }}
-                        className="text-center mb-20"
+                        className="text-center mb-6 sm:mb-10"
                     >
-                        <h2 className="text-5xl md:text-6xl font-black mb-6 text-primary-400">How It Works</h2>
-                        <p className="text-xl text-dark-300 max-w-2xl mx-auto">
+                        <h2 className="text-xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-4 text-primary-400">
+                            How It Works
+                        </h2>
+                        <p className="text-sm sm:text-base text-dark-300 max-w-2xl mx-auto">
                             Three simple steps to never miss your medication again
                         </p>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                    <div className="grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-3 max-w-6xl mx-auto">
                         <ProcessStep
                             number="1"
-                            icon={<CameraIcon className="w-10 h-10" />}
+                            icon={<CameraIcon className="w-8 h-8" />}
                             title="Capture Prescription"
                             description="Simply take a photo of your prescription using your smartphone camera. Our advanced image processing handles any lighting or angle."
                             delay={0.2}
                         />
                         <ProcessStep
                             number="2"
-                            icon={<CpuChipIcon className="w-10 h-10" />}
+                            icon={<CpuChipIcon className="w-8 h-8" />}
                             title="AI Magic"
                             description="Our cutting-edge AI powered by Amazon Textract and Mixtral AI extracts medication details, dosage, and timing with 99.9% accuracy."
                             delay={0.4}
                         />
                         <ProcessStep
                             number="3"
-                            icon={<CalendarIcon className="w-10 h-10" />}
+                            icon={<CalendarIcon className="w-8 h-8" />}
                             title="Smart Reminders"
                             description="Intelligent reminders are automatically created in your Google Calendar, perfectly timed with your meal schedule and lifestyle."
                             delay={0.6}
@@ -409,267 +372,63 @@ const LandingPage = () => {
             </section>
 
             {/* Features */}
-            <section id="features" className="py-32 relative">
-                <div className="container mx-auto px-6">
+            <section id="features" className="py-8 sm:py-12 md:py-20 relative">
+                <div className="container mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 0.8 }}
-                        className="text-center mb-20"
+                        className="text-center mb-6 sm:mb-10"
                     >
-                        <h2 className="text-5xl md:text-6xl font-black mb-6 text-primary-400">Powerful Features</h2>
-                        <p className="text-xl text-dark-300 max-w-3xl mx-auto">
-                            Built with cutting-edge technology to provide the most accurate and reliable medication
-                            management experience
-                        </p>
-                    </motion.div>
-
-                    <div className="max-w-7xl mx-auto">
-                        {/* Main Feature Grid */}
-                        <div className="grid lg:grid-cols-2 gap-8 mb-16">
-                            {/* Large Feature Card 1 */}
-                            <MainFeatureCard
-                                icon={<BoltIcon className="w-16 h-16 text-primary-400" />}
-                                title="Lightning-Fast OCR"
-                                description="Amazon Textract technology extracts text from prescriptions in milliseconds with industry-leading accuracy"
-                                features={["Real-time processing", "Multi-language support", "Handwriting recognition"]}
-                                accentColor="primary"
-                            />
-
-                            {/* Large Feature Card 2 */}
-                            <MainFeatureCard
-                                icon={<CpuChipIcon className="w-16 h-16 text-accent-blue" />}
-                                title="Advanced AI Processing"
-                                description="Mixtral AI intelligently understands complex medication instructions and dosage patterns"
-                                features={["Natural language processing", "Context understanding", "Error detection"]}
-                                accentColor="blue"
-                            />
-                        </div>
-
-                        {/* Secondary Features Grid */}
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <SecondaryFeatureCard
-                                icon={<CalendarIcon className="w-12 h-12 text-accent-purple" />}
-                                title="Smart Calendar Integration"
-                                description="Seamlessly integrates with Google Calendar for personalized medication schedules"
-                                accentColor="purple"
-                            />
-                            <SecondaryFeatureCard
-                                icon={<ShieldCheckIcon className="w-12 h-12 text-accent-green" />}
-                                title="Bank-Grade Security"
-                                description="Your health data is protected with enterprise-level security and encryption"
-                                accentColor="green"
-                            />
-                            <SecondaryFeatureCard
-                                icon={<CircleStackIcon className="w-12 h-12 text-accent-orange" />}
-                                title="Reliable Data Storage"
-                                description="MongoDB and Firebase ensure your prescription history is always accessible"
-                                accentColor="orange"
-                            />
-                            <SecondaryFeatureCard
-                                icon={<BellIcon className="w-12 h-12 text-accent-red" />}
-                                title="Never Miss Again"
-                                description="Intelligent notifications adapt to your routine and ensure perfect adherence"
-                                accentColor="red"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Testimonials */}
-            {/* <section id="testimonials" className="py-32 bg-dark-900 relative">
-                <div className="container mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center mb-20"
-                    >
-                        <h2 className="text-5xl md:text-6xl font-black mb-6 text-primary-400">Beta Testers Love It</h2>
-                        <p className="text-xl text-dark-300">Early feedback from our beta testing program</p>
-                    </motion.div>
-
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        <TestimonialCard
-                            name="Dr. Sarah Johnson"
-                            role="Internal Medicine"
-                            content="The AI accuracy is remarkable. During our beta testing, it correctly identified medication details from even challenging handwritten prescriptions."
-                            rating={5}
-                        />
-                        <TestimonialCard
-                            name="Beta Tester Mike"
-                            role="Early Adopter"
-                            content="The calendar integration is seamless. Setting up medication reminders has never been this effortless and intelligent."
-                            rating={5}
-                        />
-                        <TestimonialCard
-                            name="Healthcare Researcher"
-                            role="Beta Program"
-                            content="The technology behind this app is impressive. Amazon Textract combined with AI creates a powerful solution for medication management."
-                            rating={5}
-                        />
-                    </div>
-                </div>
-            </section> */}
-
-            {/* Tech Stack */}
-            <section className="py-32 relative">
-                <div className="container mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center mb-20"
-                    >
-                        <h2 className="text-5xl md:text-6xl font-black mb-6 text-primary-400">
-                            Built with Modern Technology
+                        <h2 className="text-xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-4 text-primary-400">
+                            Key Features
                         </h2>
-                        <p className="text-xl text-dark-300 mb-8">
-                            Powered by industry-leading technologies for maximum reliability and performance
+                        <p className="text-sm sm:text-base text-dark-300 max-w-3xl mx-auto">
+                            Built with cutting-edge technology for reliable medication management
                         </p>
                     </motion.div>
 
-                    <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
-                        <TechBadge name="React" color="blue" />
-                        <TechBadge name="Node.js" color="green" />
-                        <TechBadge name="MongoDB" color="green" />
-                        <TechBadge name="Firebase" color="orange" />
-                        <TechBadge name="Amazon Textract" color="orange" />
-                        <TechBadge name="Mixtral AI" color="purple" />
-                        <TechBadge name="Google Calendar API" color="blue" />
-                        <TechBadge name="Tailwind CSS" color="primary" />
+                    <div className="max-w-7xl mx-auto grid gap-3 sm:gap-4 md:gap-6 grid-cols-2 md:grid-cols-4">
+                        <div className="bg-dark-800/60 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-primary-500/20 hover:border-primary-400">
+                            <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2 text-white">
+                                Fast OCR
+                            </h3>
+                            <p className="text-dark-300 leading-relaxed text-xs">
+                                Amazon Textract extracts text from prescriptions in milliseconds
+                            </p>
+                        </div>
+                        <div className="bg-dark-800/60 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-primary-500/20 hover:border-primary-400">
+                            <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2 text-white">
+                                AI Processing
+                            </h3>
+                            <p className="text-dark-300 leading-relaxed text-xs">
+                                Mixtral AI understands complex medication instructions
+                            </p>
+                        </div>
+                        <div className="bg-dark-800/60 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-primary-500/20 hover:border-primary-400">
+                            <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2 text-white">
+                                Calendar Integration
+                            </h3>
+                            <p className="text-dark-300 leading-relaxed text-xs">
+                                Seamlessly syncs with Google Calendar for medication schedules
+                            </p>
+                        </div>
+                        <div className="bg-dark-800/60 backdrop-blur-sm p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-primary-500/20 hover:border-primary-400">
+                            <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2 text-white">
+                                Smart Reminders
+                            </h3>
+                            <p className="text-dark-300 leading-relaxed text-xs">
+                                Intelligent notifications adapt to your routine
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
-
-            {/* CTA Section */}
-            <section className="py-32 bg-dark-800 relative">
-                <div className="absolute inset-0 bg-hero-pattern opacity-10"></div>
-                <div className="container mx-auto px-6 text-center relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="max-w-4xl mx-auto"
-                    >
-                        <h2 className="text-5xl md:text-6xl font-black mb-8 text-primary-400">Ready to Get Started?</h2>
-                        <p className="text-xl md:text-2xl text-dark-300 mb-12 leading-relaxed">
-                            Experience the future of medication management with cutting-edge AI technology
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row justify-center gap-6 mb-12">
-                            <Link to="/signup">
-                                <motion.button
-                                    whileHover={{
-                                        scale: 1.05,
-                                        boxShadow: "0 25px 50px rgba(251, 191, 36, 0.4)",
-                                    }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="px-12 py-4 bg-primary-500 text-dark-900 rounded-2xl hover:bg-primary-400 transition-all duration-300 font-bold text-xl shadow-2xl glow-button"
-                                >
-                                    Register Now
-                                </motion.button>
-                            </Link>
-                        </div>
-
-                        {/* <div className="flex justify-center items-center space-x-8 text-dark-400 mb-16">
-                            <div className="flex items-center">
-                                <CheckCircleIcon className="w-5 h-5 text-green-400 mr-2" />
-                                Free forever
-                            </div>
-                            <div className="flex items-center">
-                                <CheckCircleIcon className="w-5 h-5 text-green-400 mr-2" />
-                                No credit card required
-                            </div>
-                            <div className="flex items-center">
-                                <CheckCircleIcon className="w-5 h-5 text-green-400 mr-2" />
-                                Setup in 30 seconds
-                            </div>
-                        </div> */}
-
-                        {/* Newsletter Signup */}
-                        {/* <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="max-w-md mx-auto"
-                        >
-                            <h3 className="text-xl font-semibold text-white mb-4">Stay Updated</h3>
-                            <div className="flex flex-col sm:flex-row gap-3">
-                                <input
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    className="flex-1 px-4 py-3 bg-dark-800/50 border border-dark-600 rounded-xl text-white placeholder-dark-400 focus:outline-none focus:border-primary-500 transition-colors duration-300"
-                                />
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="px-6 py-3 bg-primary-500 text-dark-900 rounded-xl hover:bg-primary-400 transition-colors duration-300 font-semibold"
-                                >
-                                    Subscribe
-                                </motion.button>
-                            </div>
-                        </motion.div> */}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Scroll to Top Button */}
-            {showScrollTop && (
-                <motion.button
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    onClick={scrollToTop}
-                    className="fixed bottom-8 right-8 w-16 h-16 bg-primary-500 text-dark-900 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold hover:bg-primary-600 transition-all duration-300"
-                >
-                    ↑
-                </motion.button>
-            )}
 
             {/* Footer */}
-            <footer className="border-t border-dark-700/50 py-12 bg-dark-900/90 backdrop-blur-xl">
-                <div className="container mx-auto px-6">
-                    <div className="grid md:grid-cols-4 gap-8 mb-8">
-                        <div>
-                            <h3 className="text-2xl font-bold text-primary-400 mb-4">Prescriptioner</h3>
-                            <p className="text-dark-400 mb-4">
-                                AI-powered medication management for a healthier tomorrow.
-                            </p>
-                            {/* <div className="flex space-x-4">
-                                <SocialLink />
-                                <SocialLink />
-                                <SocialLink />
-                            </div> */}
-                        </div>
-
-                        {/* <div>
-                            <h4 className="font-semibold text-white mb-4">Product</h4>
-                            <FooterLink text="Features" />
-                            <FooterLink text="How it Works" />
-                            <FooterLink text="Pricing" />
-                            <FooterLink text="API" />
-                        </div>
-
-                        <div>
-                            <h4 className="font-semibold text-white mb-4">Company</h4>
-                            <FooterLink text="About" />
-                            <FooterLink text="Blog" />
-                            <FooterLink text="Careers" />
-                            <FooterLink text="Contact" />
-                        </div>
-
-                        <div>
-                            <h4 className="font-semibold text-white mb-4">Support</h4>
-                            <FooterLink text="Help Center" />
-                            <FooterLink text="Privacy Policy" />
-                            <FooterLink text="Terms of Service" />
-                            <FooterLink text="Security" />
-                        </div> */}
-                    </div>
-
-                    <div className="border-t border-dark-700/50 pt-8 text-center text-dark-400">
+            <footer className="py-4 sm:py-6 backdrop-blur-xl">
+                <div className="container mx-auto px-4">
+                    <div className="border-t border-dark-700/50 pt-4 text-center text-dark-400 text-sm">
                         <p>Built for healthcare innovation with ❤️</p>
                     </div>
                 </div>
@@ -682,9 +441,9 @@ const LandingPage = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-8 right-8 z-50 p-3 bg-primary-500 text-dark-900 rounded-full shadow-2xl hover:shadow-primary-500/50 transition-all duration-300 hover:scale-110"
+                    className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 p-2 sm:p-3 bg-primary-500 text-dark-900 rounded-full shadow-xl hover:shadow-primary-500/50 transition-all duration-300 hover:scale-110"
                 >
-                    <ArrowRightIcon className="w-6 h-6 transform -rotate-90" />
+                    <ArrowRightIcon className="w-4 h-4 sm:w-5 sm:h-5 transform -rotate-90" />
                 </motion.button>
             )}
         </div>
@@ -696,20 +455,10 @@ const NavLink = ({ onClick, children }) => (
     <motion.button
         onClick={onClick}
         whileHover={{ scale: 1.05 }}
-        className="text-dark-300 hover:text-primary-400 transition-colors duration-300 font-medium"
+        className="text-dark-300 hover:text-primary-400 transition-colors duration-300 font-medium text-sm sm:text-base"
     >
         {children}
     </motion.button>
-);
-
-const StatCard = ({ number, label }) => (
-    <motion.div
-        whileHover={{ scale: 1.05 }}
-        className="text-center p-6 bg-dark-800/50 backdrop-blur-sm border border-dark-700/50 rounded-2xl"
-    >
-        <div className="text-3xl font-bold text-primary-400 mb-2">{number}</div>
-        <div className="text-dark-300">{label}</div>
-    </motion.div>
 );
 
 const ProcessStep = ({ number, icon, title, description, delay }) => (
@@ -720,70 +469,14 @@ const ProcessStep = ({ number, icon, title, description, delay }) => (
         whileHover={{ scale: 1.05 }}
         className="text-center group"
     >
-        <div className="relative mb-8">
-            <div className="w-20 h-20 bg-primary-500 text-dark-900 rounded-2xl flex items-center justify-center mx-auto text-2xl font-black shadow-2xl group-hover:shadow-primary-500/50 transition-all duration-300">
+        <div className="relative mb-4 sm:mb-6">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-primary-500 text-dark-900 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto text-lg sm:text-xl font-black shadow-xl group-hover:shadow-primary-500/50 transition-all duration-300">
                 {number}
             </div>
-            <div className="absolute -top-3 -right-3 bg-dark-800 rounded-2xl p-3 text-primary-400 border border-primary-500/30 group-hover:border-primary-400 transition-all duration-300">
-                {icon}
-            </div>
         </div>
-        <h3 className="text-2xl font-bold mb-4 text-primary-400">{title}</h3>
-        <p className="text-dark-300 leading-relaxed">{description}</p>
+        <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-primary-400">{title}</h3>
+        <p className="text-dark-300 leading-relaxed text-xs sm:text-sm">{description}</p>
     </motion.div>
-);
-
-const TestimonialCard = ({ name, role, content, rating }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.6 }}
-        className="bg-dark-800/50 p-8 rounded-3xl border border-dark-700/50 backdrop-blur-sm"
-    >
-        <div className="flex mb-4">
-            {[...Array(rating)].map((_, i) => (
-                <StarIcon key={i} className="w-5 h-5 text-primary-400 fill-current" />
-            ))}
-        </div>
-        <p className="text-dark-200 leading-relaxed mb-6 italic">"{content}"</p>
-        <div>
-            <div className="font-semibold text-white">{name}</div>
-            <div className="text-dark-400">{role}</div>
-        </div>
-    </motion.div>
-);
-
-const TechBadge = ({ name, color = "primary" }) => {
-    const colorClasses = {
-        primary: "bg-primary-500 text-dark-900",
-        blue: "bg-accent-blue text-white",
-        green: "bg-accent-green text-white",
-        purple: "bg-accent-purple text-white",
-        orange: "bg-accent-orange text-white",
-        red: "bg-accent-red text-white",
-    };
-
-    return (
-        <motion.div
-            whileHover={{ scale: 1.1, y: -5 }}
-            className={`px-6 py-3 ${colorClasses[color]} rounded-2xl font-semibold shadow-lg cursor-pointer`}
-        >
-            {name}
-        </motion.div>
-    );
-};
-
-const FooterLink = ({ text }) => (
-    <button className="block text-dark-400 hover:text-primary-400 transition-colors duration-300 mb-2 text-left">
-        {text}
-    </button>
-);
-
-const SocialLink = () => (
-    <div className="w-10 h-10 bg-dark-800 rounded-full flex items-center justify-center hover:bg-primary-500 transition-colors duration-300 cursor-pointer">
-        <div className="w-4 h-4 bg-dark-400 rounded-full"></div>
-    </div>
 );
 
 export default LandingPage;
