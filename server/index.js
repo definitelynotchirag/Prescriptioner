@@ -20,6 +20,7 @@ const corsOptions = {
     origin: [
         "http://localhost:3000",
         "https://prescriptioner.onrender.com",
+        "https://prescriptioner.chiragx.me/",
         "https://prescriptioner-qp3w.onrender.com",
     ],
     credentials: true,
