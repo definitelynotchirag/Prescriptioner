@@ -31,9 +31,11 @@ const GoogleAuthSignup = ({ setUser }) => {
 
         // Create OAuth2 flow with calendar permissions
         const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+        const redirectUri = window.location.origin + "/oauth2callback";
+        
         const params = new URLSearchParams({
             client_id: "495171980207-d5n0p7v6ubb315cssm8d93pm31i3pqoi.apps.googleusercontent.com",
-            redirect_uri: "https://prescriptioner.chiragx.me/oauth2callback",
+            redirect_uri: redirectUri,
             response_type: "code",
             scope: ["openid", "email", "profile", "https://www.googleapis.com/auth/calendar"].join(" "),
             access_type: "offline",

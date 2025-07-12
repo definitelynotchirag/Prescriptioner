@@ -65,9 +65,11 @@ const GoogleAuthLogin = ({ setUser, user }) => {
 
             // Create OAuth2 flow with calendar permissions
             const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+            const redirectUri = window.location.origin + "/oauth2callback";
+            
             const params = new URLSearchParams({
                 client_id: "495171980207-d5n0p7v6ubb315cssm8d93pm31i3pqoi.apps.googleusercontent.com",
-                redirect_uri: "https://prescriptioner.chiragx.me/oauth2callback",
+                redirect_uri: redirectUri,
                 response_type: "code",
                 scope: ["openid", "email", "profile", "https://www.googleapis.com/auth/calendar"].join(" "),
                 access_type: "offline",
@@ -104,7 +106,7 @@ const GoogleAuthLogin = ({ setUser, user }) => {
                             <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99z" />
                         </svg>
                     </div> */}
-                    <h1 className="text-5xl font-extrabold text-yellow-400 tracking-wide mb-2">Prescriptioner</h1>
+                    <h1 className="text-5xl font-extrabold text-yellow-400 tracking-wide mb-2"><a href="/">Prescriptioner</a></h1>
                     <p className="text-gray-400 text-base text-center max-w-xs">
                         Your all-in-one medication and reminder platform
                     </p>

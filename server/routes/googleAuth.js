@@ -14,7 +14,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 const oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID || "495171980207-d5n0p7v6ubb315cssm8d93pm31i3pqoi.apps.googleusercontent.com",
     process.env.GOOGLE_CLIENT_SECRET,
-    process.env.GOOGLE_REDIRECT_URI || "http://localhost:3000/oauth2callback"
+    // Redirect URI will be set dynamically based on request
 );
 
 // Handle Google OAuth callback
@@ -22,11 +22,14 @@ router.post("/google-callback", async (req, res) => {
     try {
         const { code, state, redirectUri } = req.body;
 
-        console.log("Received Google OAuth callback:", { code: code?.substring(0, 20) + "...", state });
+        console.log("Received Google OAuth callback:", { code: code?.substring(0, 20) + "...", state, redirectUri });
 
         if (!code) {
             return res.status(400).json({ error: "Authorization code is required" });
         }
+
+        // Set the redirect URI for this specific request
+        oauth2Client.redirectUri = redirectUri;
 
         // Exchange code for tokens
         const { tokens } = await oauth2Client.getToken(code);
@@ -145,10 +148,10 @@ router.post("/google-callback", async (req, res) => {
             // Don't fail the auth flow if token saving fails
         }
 
-        // Generate JWT token
+        // Generate JWT token (match format expected by autoLogin)
         const jwtToken = jwt.sign(
             {
-                userId: rootUser._id,
+                id: rootUser._id,
                 email: userInfo.email,
                 calendarAccess: true,
             },
@@ -194,8 +197,8 @@ router.get("/status", async (req, res) => {
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        const rootUser = await RootUser.findById(decoded.userId);
-        const user = await User.findOne({ rootUser: decoded.userId });
+        const rootUser = await RootUser.findById(decoded.id);
+        const user = await User.findOne({ rootUser: decoded.id });
 
         if (!rootUser || !user) {
             return res.json({ authenticated: false });

@@ -1,6 +1,14 @@
 const { google } = require("googleapis");
 const { authorize } = require("./googleCalendar");
 const User = require("../models/User");
+const RootUser = require("../models/rootuser");
+
+// Default meal timings
+const DEFAULT_MEAL_TIMINGS = {
+    breakfastTime: "08:00",
+    lunchTime: "13:00",
+    dinnerTime: "19:00",
+};
 
 /**
  * Calculate medication times based on user meal timings and medication dosage
@@ -80,17 +88,34 @@ async function createMedicationReminders(medication, userId) {
     try {
         console.log("Creating medication reminders for:", medication.name);
 
-        // Get user meal timings
-        const user = await User.findById(userId);
-        if (!user) {
-            throw new Error("User not found");
+        // Try to get user meal timings, fall back to defaults
+        let mealTimings = DEFAULT_MEAL_TIMINGS;
+
+        try {
+            // First try to find in User model
+            const user = await User.findById(userId);
+            if (user && user.breakfastTime) {
+                mealTimings = {
+                    breakfastTime: user.breakfastTime,
+                    lunchTime: user.lunchTime,
+                    dinnerTime: user.dinnerTime,
+                };
+            } else {
+                // If not found in User, check RootUser for future meal timing support
+                const rootUser = await RootUser.findById(userId);
+                if (rootUser && rootUser.breakfastTime) {
+                    mealTimings = {
+                        breakfastTime: rootUser.breakfastTime,
+                        lunchTime: rootUser.lunchTime,
+                        dinnerTime: rootUser.dinnerTime,
+                    };
+                }
+            }
+        } catch (userError) {
+            console.log("Using default meal timings:", userError.message);
         }
 
-        const mealTimings = {
-            breakfastTime: user.breakfastTime,
-            lunchTime: user.lunchTime,
-            dinnerTime: user.dinnerTime,
-        };
+        console.log("Using meal timings:", mealTimings);
 
         // Calculate medication times
         const medicationTimes = calculateMedicationTimes(mealTimings, medication.dosage, medication.timing);

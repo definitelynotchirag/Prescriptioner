@@ -153,10 +153,25 @@ const PrescriptionDashboard = () => {
                         title: newPrescription.title,
                     });
 
-                    // console.log("Prescription processed:", medications.data);
+                    console.log("Prescription processed:", medications.data);
 
-                    // Show success message
-                    setSuccessMessage("Prescription uploaded successfully!");
+                    // Check if calendar reminders were created automatically
+                    if (medications.data.calendarReminders) {
+                        const successfulReminders = medications.data.calendarReminders.filter(r => r.success).length;
+                        const totalMedications = medications.data.calendarReminders.length;
+
+                        setSuccessMessage(
+                            `Prescription uploaded successfully! 🎉\n` +
+                                `Automatically created ${successfulReminders}/${totalMedications} medication reminders in Google Calendar.`
+                        );
+                    } else if (medications.data.needsCalendarAuth) {
+                        setSuccessMessage(
+                            `Prescription uploaded successfully! 📋\n` +
+                                `To create automatic calendar reminders, please authenticate with Google Calendar first.`
+                        );
+                    } else {
+                        setSuccessMessage("Prescription uploaded successfully! 📋");
+                    }
 
                     // Fetch updated prescriptions to show the new one
                     fetchPrescriptions();
@@ -294,6 +309,46 @@ const PrescriptionDashboard = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Calendar Status Info */}
+                {calendarStatus !== null && (
+                    <div
+                        className={`mb-6 p-4 rounded-xl border ${
+                            calendarStatus
+                                ? "bg-green-900/20 border-green-500/30 text-green-300"
+                                : "bg-yellow-900/20 border-yellow-500/30 text-yellow-300"
+                        }`}
+                    >
+                        <div className="flex items-center space-x-3">
+                            <Calendar className="h-5 w-5" />
+                            <div>
+                                {calendarStatus ? (
+                                    <div>
+                                        <p className="font-medium">🎉 Google Calendar Connected!</p>
+                                        <p className="text-sm opacity-80">
+                                            Medication reminders will be automatically created when you upload
+                                            prescriptions.
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <p className="font-medium">📅 Connect Google Calendar</p>
+                                        <p className="text-sm opacity-80">
+                                            Authenticate with Google Calendar to automatically create medication
+                                            reminders when uploading prescriptions.
+                                        </p>
+                                        <Link
+                                            to="/calendar"
+                                            className="text-blue-400 hover:text-blue-300 text-sm underline mt-1 inline-block"
+                                        >
+                                            Set up Calendar Integration →
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Prescriptions Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -561,9 +616,11 @@ const PrescriptionDashboard = () => {
 
                                 {/* Success Message */}
                                 {successMessage && (
-                                    <div className="flex items-center space-x-2 p-3 bg-green-900/20 border border-green-600/30 rounded-xl">
-                                        <CheckCircle className="w-5 h-5 text-green-400" />
-                                        <span className="text-green-400 text-sm font-medium">{successMessage}</span>
+                                    <div className="flex items-start space-x-2 p-3 bg-green-900/20 border border-green-600/30 rounded-xl">
+                                        <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                                        <div className="text-green-400 text-sm font-medium whitespace-pre-line">
+                                            {successMessage}
+                                        </div>
                                     </div>
                                 )}
 
